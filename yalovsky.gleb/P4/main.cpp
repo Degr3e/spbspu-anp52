@@ -113,7 +113,6 @@ namespace yalovsky
                     case 'i':
                     case 'o':
                     case 'u':
-                    case 'y':
                         isVowel = true;
                         break;
                     default:
@@ -131,4 +130,64 @@ namespace yalovsky
         result[resultIndex] = '\0';
         return result;
     }
+
+    int hasSequentialDuplicates(const char * str)
+    {
+        if (!str)
+        {
+            return -1;
+        }
+
+        size_t length = std::strlen(str);
+        if (length < 2)
+        {
+            return 0;
+        }
+
+        for (size_t i = 1; i < length; ++i)
+        {
+            if (str[i] == str[i - 1])
+            {
+                return 1;
+            }
+        }
+
+        return 0;
+    }
+}
+
+int main()
+{
+    using namespace yalovsky;
+
+    char * inputStr = readLine(std::cin);
+    if (!inputStr)
+    {
+        std::cerr << "Error: failed to read input string\n";
+        return 1;
+    }
+
+    int hasDuplicates = hasSequentialDuplicates(inputStr);
+    if (hasDuplicates == -1)
+    {
+        std::cerr << "Error: failed to check for sequential duplicates\n";
+        delete[] inputStr;
+        return 1;
+    }
+
+    char * noVowelsStr = removeVowels(inputStr);
+    if (!noVowelsStr)
+    {
+        std::cerr << "Error: failed to remove vowels\n";
+        delete[] inputStr;
+        return 1;
+    }
+
+    std::cout << hasDuplicates << '\n';
+    std::cout << noVowelsStr << '\n';
+
+    delete[] inputStr;
+    delete[] noVowelsStr;
+
+    return 0;
 }
