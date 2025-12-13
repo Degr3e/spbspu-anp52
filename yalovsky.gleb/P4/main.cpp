@@ -103,9 +103,9 @@ namespace yalovsky
             bool isVowel = false;
 
 
-            if (std::isalpha(static_cast<unsigned char>(currentChar)))
+            if (std::isalpha(static_cast< unsigned char >(currentChar)))
             {
-                char lowerChar = std::tolower(static_cast<unsigned char>(currentChar));
+                char lowerChar = std::tolower(static_cast< unsigned char >(currentChar));
                 switch (lowerChar)
                 {
                     case 'a':
