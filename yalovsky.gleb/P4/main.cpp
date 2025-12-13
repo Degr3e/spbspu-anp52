@@ -81,4 +81,54 @@ namespace yalovsky
 
         return buffer;
     }
+
+    char * removeVowels(const char * source)
+    {
+        if (!source)
+        {
+            return nullptr;
+        }
+
+        size_t sourceLength = std::strlen(source);
+        char * result = createString(sourceLength + 1);
+        if (!result)
+        {
+            return nullptr;
+        }
+
+        size_t resultIndex = 0;
+        for (size_t i = 0; i < sourceLength; ++i)
+        {
+            char currentChar = source[i];
+            bool isVowel = false;
+
+
+            if (std::isalpha(static_cast<unsigned char>(currentChar)))
+            {
+                char lowerChar = std::tolower(static_cast<unsigned char>(currentChar));
+                switch (lowerChar)
+                {
+                    case 'a':
+                    case 'e':
+                    case 'i':
+                    case 'o':
+                    case 'u':
+                    case 'y':
+                        isVowel = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (!isVowel)
+            {
+                result[resultIndex] = currentChar;
+                ++resultIndex;
+            }
+        }
+
+        result[resultIndex] = '\0';
+        return result;
+    }
 }
