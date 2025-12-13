@@ -5,19 +5,19 @@
 
 namespace yalovsky
 {
-    char * createString(size_t capacity)
+    char* createString(size_t capacity)
     {
         if (capacity == 0)
         {
             return nullptr;
         }
 
-        char * str = nullptr;
+        char* str = nullptr;
         try
         {
             str = new char[capacity];
         }
-        catch (const std::bad_alloc &)
+        catch (const std::bad_alloc&)
         {
             std::cerr << "bad alloc\n";
             return nullptr;
@@ -25,13 +25,13 @@ namespace yalovsky
         return str;
     }
 
-    char * readLine(std::istream & input)
+    char* readLine(std::istream& input)
     {
         const size_t kInitialCapacity = 64;
         size_t capacity = kInitialCapacity;
         size_t length = 0;
 
-        char * buffer = createString(capacity);
+        char* buffer = createString(capacity);
         if (!buffer)
         {
             return nullptr;
@@ -49,9 +49,8 @@ namespace yalovsky
         {
             if (length + 1 >= capacity)
             {
-
                 size_t newCapacity = capacity * 2;
-                char * newBuffer = createString(newCapacity);
+                char* newBuffer = createString(newCapacity);
                 if (!newBuffer)
                 {
                     delete[] buffer;
@@ -82,7 +81,7 @@ namespace yalovsky
         return buffer;
     }
 
-    char * removeVowels(const char * source)
+    char* removeVowels(const char* source)
     {
         if (!source)
         {
@@ -90,7 +89,7 @@ namespace yalovsky
         }
 
         size_t sourceLength = std::strlen(source);
-        char * result = createString(sourceLength + 1);
+        char* result = createString(sourceLength + 1);
         if (!result)
         {
             return nullptr;
@@ -102,9 +101,9 @@ namespace yalovsky
             char currentChar = source[i];
             bool isVowel = false;
 
-            if (std::isalpha(static_cast< unsigned char >(currentChar)))
+            if (std::isalpha(static_cast<unsigned char>(currentChar)))
             {
-                char lowerChar = std::tolower(static_cast< unsigned char >(currentChar));
+                char lowerChar = std::tolower(static_cast<unsigned char>(currentChar));
                 switch (lowerChar)
                 {
                 case 'a':
@@ -130,7 +129,7 @@ namespace yalovsky
         return result;
     }
 
-    int hasSequentialDuplicates(const char * str)
+    int hasSequentialDuplicates(const char* str)
     {
         if (!str)
         {
@@ -159,7 +158,7 @@ int main()
 {
     using namespace yalovsky;
 
-    char * inputStr = readLine(std::cin);
+    char* inputStr = readLine(std::cin);
     if (!inputStr)
     {
         std::cerr << "Error: failed to read input string\n";
@@ -174,7 +173,7 @@ int main()
         return 1;
     }
 
-    char * noVowelsStr = removeVowels(inputStr);
+    char* noVowelsStr = removeVowels(inputStr);
     if (!noVowelsStr)
     {
         std::cerr << "Error: failed to remove vowels\n";
